@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, Input, Row, Text } from "sha-el-design/lib";
+import { Button, Col, Input, Row, Skeleton, Text } from "sha-el-design/lib";
 
 import axios from "axios";
 import { FetchResponse } from "./App/Typings/Shows";
@@ -85,7 +85,10 @@ const App: React.FC = () => {
               spanXl={4.8}
               offset={{ xs: 4, sm: 1, md: 0 }}
             >
-              <ShowCard data={v} />
+              <Skeleton
+                isLoading={loading}
+                render={() => <ShowCard data={v} />}
+              />
             </Col>
           ))}
         </Row>
