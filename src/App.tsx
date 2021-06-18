@@ -1,15 +1,9 @@
-import axios from "axios";
 import React from "react";
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardMedia,
-  Col,
-  Input,
-  Row,
-  Text,
-} from "sha-el-design/lib";
+import { Button, Col, Input, Row, Text } from "sha-el-design/lib";
+
+import axios from "axios";
+import { FetchResponse } from "./App/Typings/Shows";
+import { ShowCard } from "./App/Components/ShowCard";
 
 const App: React.FC = () => {
   const [InputValue, updateInputValue] = React.useState<string>("");
@@ -91,24 +85,7 @@ const App: React.FC = () => {
               spanXl={4.8}
               offset={{ xs: 4, sm: 1, md: 0 }}
             >
-              <Card>
-                <CardMedia
-                  image={
-                    v.show.image?.medium ||
-                    "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png"
-                  }
-                  height="270px"
-                />
-                <CardHeader>
-                  <Row>
-                    <Col>
-                      <Text variant="h6" textAlign="center">
-                        {v.show.name}
-                      </Text>
-                    </Col>
-                  </Row>
-                </CardHeader>
-              </Card>
+              <ShowCard data={v} />
             </Col>
           ))}
         </Row>
@@ -116,38 +93,5 @@ const App: React.FC = () => {
     </Row>
   );
 };
-
-interface FetchResponse {
-  score: number;
-  show: {
-    id: number;
-    url: string;
-    name: string;
-    type: string;
-    language: string;
-    generes: string[];
-    status: string;
-    runtime: any;
-    averageRuntime: any;
-    premiered: string;
-    officialSite: string;
-    schedule: any;
-    rating: {
-      average: number;
-    };
-    weight: any;
-    network: any;
-    webChannel: any;
-    dvdCountry: any;
-    externals: any;
-    image: {
-      medium: string;
-      original: string;
-    };
-    summary: string;
-    updated: any;
-    _links: any;
-  };
-}
 
 export default App;
