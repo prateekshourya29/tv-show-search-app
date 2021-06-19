@@ -6,7 +6,7 @@ export interface FetchResponse {
     name: string;
     type: string;
     language: string;
-    generes: string[];
+    genres: string[];
     status: string;
     runtime: any;
     averageRuntime: any;
@@ -29,4 +29,33 @@ export interface FetchResponse {
     updated: any;
     _links: any;
   };
+}
+
+export interface CastDetails {
+  person: {
+    id: number;
+    url: string;
+    name: string;
+    country: any;
+    birthday: any;
+    deathday: any;
+    gender: any;
+    image: {
+      medium: string;
+      original: string;
+    };
+    _links: any;
+  };
+  character: {
+    id: number;
+    url: string;
+    name: string;
+    image: {
+      medium: string;
+      original: string;
+    };
+    _links: any;
+  };
+  self: any;
+  voice: any;
 }

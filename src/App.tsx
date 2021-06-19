@@ -1,16 +1,17 @@
 import React from "react";
 import { Button, Col, Input, Row, Skeleton, Text } from "sha-el-design/lib";
+import { ShowCard } from "./App/Components/ShowCard";
 
 import axios from "axios";
+import { createArray } from "./App/helper";
 import { FetchResponse } from "./App/Typings/Shows";
-import { ShowCard } from "./App/Components/ShowCard";
 
 const App: React.FC = () => {
   const [InputValue, updateInputValue] = React.useState<string>("");
   const [res, updateRes] = React.useState<FetchResponse[]>([]);
   const [loading, updateLoading] = React.useState<boolean>(false);
 
-  const searchTvShows = async (query: string) => {
+  const fetchTvShows = async (query: string) => {
     updateLoading(true);
 
     const res = await axios.get(
@@ -23,7 +24,7 @@ const App: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    searchTvShows(InputValue);
+    fetchTvShows(InputValue);
   };
 
   return (
@@ -76,21 +77,33 @@ const App: React.FC = () => {
       </Col>
       <Col spanXs={22} spanSm={22} spanXl={20} offset={{ xs: 1, sm: 1, xl: 2 }}>
         <Row gutter={[15, 15]}>
-          {res.map((v) => (
-            <Col
-              spanXs={16}
-              spanSm={11}
-              spanMd={8}
-              spanLg={6}
-              spanXl={4.8}
-              offset={{ xs: 4, sm: 1, md: 0 }}
-            >
-              <Skeleton
-                isLoading={loading}
-                render={() => <ShowCard data={v} />}
-              />
-            </Col>
-          ))}
+          {loading
+            ? createArray(10).map((v: number) => (
+                <Col
+                  key={v}
+                  spanXs={16}
+                  spanSm={11}
+                  spanMd={8}
+                  spanLg={6}
+                  spanXl={4.8}
+                  offset={{ xs: 4, sm: 1, md: 0 }}
+                >
+                  <Skeleton isLoading={loading} />
+                </Col>
+              ))
+            : res.map((v, i) => (
+                <Col
+                  key={i}
+                  spanXs={16}
+                  spanSm={11}
+                  spanMd={8}
+                  spanLg={6}
+                  spanXl={4.8}
+                  offset={{ xs: 4, sm: 1, md: 0 }}
+                >
+                  <ShowCard data={v} />
+                </Col>
+              ))}
         </Row>
       </Col>
     </Row>
