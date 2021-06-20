@@ -77,7 +77,7 @@ export const ShowCard = (props: { data: FetchResponse }) => {
         width="70%"
         isVisible={isVisible}
         onClose={onClose}
-        style={{ borderRadius: "10px" }}
+        style={{ borderRadius: "10px", scrollbarWidth: "none" }}
       >
         <Row>
           <Col span={17}>
@@ -124,7 +124,7 @@ export const ShowCard = (props: { data: FetchResponse }) => {
                             flat
                             onClick={() => updateEntireCast(false)}
                           >
-                            Hide Cast
+                            Show Less
                           </Button>
                         </Col>
                       )}
