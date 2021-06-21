@@ -32,7 +32,7 @@ const App: React.FC = () => {
     <Row>
       <Col>
         <Text variant="h2" textAlign="center">
-          Search TV Show
+          Search TV Shows
         </Text>
       </Col>
       <Col
@@ -82,12 +82,12 @@ const App: React.FC = () => {
             createArray(10).map((v: number) => (
               <Col
                 key={v}
-                spanXs={16}
+                spanXs={18}
                 spanSm={11}
                 spanMd={8}
                 spanLg={6}
                 spanXl={4.8}
-                offset={{ xs: 4, sm: 1, md: 0 }}
+                offset={{ xs: 3, sm: 1, md: 0 }}
               >
                 <Skeleton isLoading={loading} />
               </Col>
@@ -103,12 +103,12 @@ const App: React.FC = () => {
             res.map((v, i) => (
               <Col
                 key={i}
-                spanXs={16}
+                spanXs={18}
                 spanSm={11}
                 spanMd={8}
                 spanLg={6}
                 spanXl={4.8}
-                offset={{ xs: 4, sm: 1, md: 0 }}
+                offset={{ xs: 3, sm: 1, md: 0 }}
               >
                 <ShowCard data={v} />
               </Col>

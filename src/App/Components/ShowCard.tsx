@@ -151,12 +151,12 @@ export const ShowCard = (props: { data: FetchResponse }) => {
                 createArray(5).map((v: number) => (
                   <Col
                     key={v}
-                    spanXs={18}
+                    spanXs={20}
                     spanSm={12}
                     spanMd={8}
                     spanLg={6}
                     spanXl={4.8}
-                    offset={{ xs: 4 }}
+                    offset={{ xs: 2 }}
                   >
                     <Skeleton isLoading={loading} />
                   </Col>
@@ -166,12 +166,12 @@ export const ShowCard = (props: { data: FetchResponse }) => {
                   {res.map((v, i) => (
                     <Col
                       key={i}
-                      spanXs={18}
+                      spanXs={20}
                       spanSm={12}
                       spanMd={8}
                       spanLg={6}
                       spanXl={4.8}
-                      offset={{ xs: 4 }}
+                      offset={{ xs: 2 }}
                     >
                       <CastCard data={v} />
                     </Col>
