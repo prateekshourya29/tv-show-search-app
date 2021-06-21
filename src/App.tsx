@@ -92,7 +92,7 @@ const App: React.FC = () => {
                 <Skeleton isLoading={loading} />
               </Col>
             ))
-          ) : !res.length ? (
+          ) : !res?.length ? (
             <Col>
               <GiEmptyMetalBucket size="150px" style={{ margin: "auto" }} />
               <Text variant="h6" textAlign="center">
@@ -100,7 +100,7 @@ const App: React.FC = () => {
               </Text>
             </Col>
           ) : (
-            res.map((v, i) => (
+            res?.map((v, i) => (
               <Col
                 key={i}
                 spanXs={18}

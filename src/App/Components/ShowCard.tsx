@@ -22,7 +22,7 @@ export const ShowCard = (props: { data: FetchResponse }) => {
   const [res, updateRes] = React.useState<CastDetails[]>([]);
   const [loading, updateLoading] = React.useState<boolean>(false);
   const [showEntireCast, updateEntireCast] = React.useState<boolean>(false);
-  const showDetails = props.data.show;
+  const showDetails = props.data?.show;
 
   const fetchCastDetails = async (id: number) => {
     updateLoading(true);
@@ -46,7 +46,7 @@ export const ShowCard = (props: { data: FetchResponse }) => {
       <Card style={{ cursor: "pointer", height: "380px" }} onClick={onOpen}>
         <CardMedia
           image={
-            showDetails.image?.medium ||
+            showDetails?.image?.medium ||
             "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png"
           }
           height="270px"
@@ -54,12 +54,12 @@ export const ShowCard = (props: { data: FetchResponse }) => {
         <CardHeader>
           <div style={{ width: "180px" }}>
             <Text variant="h6" textAlign="center">
-              {showDetails.name}
+              {showDetails?.name}
             </Text>
           </div>
         </CardHeader>
         <Row gutter={[0, 0]}>
-          {showDetails.rating.average && (
+          {showDetails?.rating?.average && (
             <Col span={12}>
               <Tag outline color="danger" size="SMALL">
                 {showDetails.rating.average}
@@ -81,7 +81,7 @@ export const ShowCard = (props: { data: FetchResponse }) => {
           borderRadius: "10px",
           scrollbarWidth: "none",
           background: `linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .9)), url(${
-            showDetails.image.original ||
+            showDetails?.image?.original ||
             "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png"
           }) no-repeat center`,
           backgroundSize: "cover",
@@ -96,13 +96,13 @@ export const ShowCard = (props: { data: FetchResponse }) => {
             <Col span={22} offset={2}>
               <Text variant="p" fontSize="20px">
                 <div
-                  dangerouslySetInnerHTML={{ __html: showDetails.summary }}
+                  dangerouslySetInnerHTML={{ __html: showDetails?.summary }}
                 />
               </Text>
             </Col>
             <Col span={22} offset={2}>
               <Row gutter={[0, 0]}>
-                {showDetails.webChannel?.name && (
+                {showDetails?.webChannel?.name && (
                   <Col
                     flex="0 1 auto"
                     style={{
@@ -128,10 +128,10 @@ export const ShowCard = (props: { data: FetchResponse }) => {
                 <Col
                   flex="1 1 auto"
                   style={{
-                    paddingLeft: showDetails.webChannel?.name && "20px",
+                    paddingLeft: showDetails?.webChannel?.name && "20px",
                   }}
                 >
-                  {showDetails.genres?.map((v, i) => (
+                  {showDetails?.genres?.map((v, i) => (
                     <Tag key={i} color="info" size="SMALL">
                       {v}
                     </Tag>
@@ -140,7 +140,7 @@ export const ShowCard = (props: { data: FetchResponse }) => {
               </Row>
             </Col>
           </Row>
-          {!!res.length && (
+          {!!res?.length && (
             <Col span={22} offset={1}>
               <Text variant="h3">Cast</Text>
             </Col>
@@ -161,9 +161,9 @@ export const ShowCard = (props: { data: FetchResponse }) => {
                     <Skeleton isLoading={loading} />
                   </Col>
                 ))
-              ) : res.length < 5 || showEntireCast ? (
+              ) : res?.length < 5 || showEntireCast ? (
                 <>
-                  {res.map((v, i) => (
+                  {res?.map((v, i) => (
                     <Col
                       key={i}
                       spanXs={20}
@@ -176,7 +176,7 @@ export const ShowCard = (props: { data: FetchResponse }) => {
                       <CastCard data={v} />
                     </Col>
                   ))}
-                  {res.length > 5 && (
+                  {res?.length > 5 && (
                     <Col span={22}>
                       <Button
                         primary
@@ -190,7 +190,7 @@ export const ShowCard = (props: { data: FetchResponse }) => {
                 </>
               ) : (
                 <>
-                  {res.slice(0, 5).map((v, i) => (
+                  {res?.slice(0, 5).map((v, i) => (
                     <Col
                       key={i}
                       spanXs={20}
