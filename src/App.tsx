@@ -16,7 +16,7 @@ const App: React.FC = () => {
     updateLoading(true);
 
     const res = await axios.get(
-      `http://api.tvmaze.com/search/shows?q=${query}`
+      `https://api.tvmaze.com/search/shows?q=${query}`
     );
     updateRes(res.data);
 

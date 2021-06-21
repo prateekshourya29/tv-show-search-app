@@ -26,7 +26,7 @@ export const ShowCard = (props: { data: FetchResponse }) => {
 
   const fetchCastDetails = async (id: number) => {
     updateLoading(true);
-    const res = await axios.get(`http://api.tvmaze.com/shows/${id}/cast`);
+    const res = await axios.get(`https://api.tvmaze.com/shows/${id}/cast`);
     updateRes(res.data);
     updateLoading(false);
   };
