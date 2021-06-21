@@ -77,109 +77,142 @@ export const ShowCard = (props: { data: FetchResponse }) => {
         width="70%"
         isVisible={isVisible}
         onClose={onClose}
-        style={{ borderRadius: "10px", scrollbarWidth: "none" }}
+        style={{
+          borderRadius: "10px",
+          scrollbarWidth: "none",
+          background: `linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .9)), url(${
+            showDetails.image.original ||
+            "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png"
+          }) no-repeat center`,
+          backgroundSize: "cover",
+          color: "white",
+        }}
       >
-        <Row>
-          <Col span={17}>
-            <Row>
-              <Col span={22} offset={1}>
-                <Text variant="h3">{showDetails.name}</Text>
-              </Col>
-              <Col span={22} offset={2}>
-                <Text variant="p" fontSize="16px">
-                  {showDetails.summary}
-                </Text>
-              </Col>
-              <Col span={22} offset={2}>
-                {showDetails.genres?.map((v, i) => (
-                  <Tag key={i} size="SMALL" color="info">
-                    {v}
-                  </Tag>
-                ))}
-              </Col>
-              {!!res.length && (
-                <Col span={22} offset={1}>
-                  <Text variant="h4">Cast</Text>
-                </Col>
-              )}
-              <Col span={23} offset={1}>
-                <Row gutter={[10, 10]}>
-                  {loading ? (
-                    createArray(4).map((v: number) => (
-                      <Col key={v} span={6}>
-                        <Skeleton isLoading={loading} />
-                      </Col>
-                    ))
-                  ) : res.length < 4 || showEntireCast ? (
-                    <>
-                      {res.map((v, i) => (
-                        <Col key={i} span={6}>
-                          <CastCard data={v} />
-                        </Col>
-                      ))}
-                      {res.length > 4 && (
-                        <Col span={22}>
-                          <Button
-                            primary
-                            flat
-                            onClick={() => updateEntireCast(false)}
-                          >
-                            Show Less
-                          </Button>
-                        </Col>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      {res.slice(0, 4).map((v, i) => (
-                        <Col key={i} span={6}>
-                          <CastCard data={v} />
-                        </Col>
-                      ))}
-                      <Col span={22}>
-                        <Button
-                          primary
-                          flat
-                          onClick={() => updateEntireCast(true)}
-                        >
-                          Show Entire Cast
-                        </Button>
-                      </Col>
-                    </>
-                  )}
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-          <Col span={7}>
-            <Row>
-              <Col span={20} offset={2}>
-                <Card>
-                  <CardMedia
-                    image={
-                      showDetails.image?.medium ||
-                      "https://static.tvmaze.com/images/no-img/no-img-portrait-text.png"
-                    }
-                    height="350px"
-                  />
-                </Card>
-              </Col>
-              {showDetails.webChannel?.name && (
-                <Col span={20} offset={2}>
-                  <Button
-                    primary
-                    size="small"
-                    href={showDetails?.officialSite}
-                    target="_blank"
-                    rel="noreferrer"
+        <>
+          <Row gutter={[5, 5]}>
+            <Col span={22} offset={1}>
+              <Text variant="h2">{showDetails.name}</Text>
+            </Col>
+            <Col span={22} offset={2}>
+              <Text variant="p" fontSize="20px">
+                <div
+                  dangerouslySetInnerHTML={{ __html: showDetails.summary }}
+                />
+              </Text>
+            </Col>
+            <Col span={22} offset={2}>
+              <Row gutter={[0, 0]}>
+                {showDetails.webChannel?.name && (
+                  <Col
+                    flex="0 1 auto"
+                    style={{
+                      borderRight: "2px solid white",
+                      paddingRight: "20px",
+                    }}
                   >
-                    {showDetails.webChannel?.name}
-                  </Button>
+                    <Text fontSize="20px">Watch this at</Text>
+                    <Button
+                      primary
+                      size="small"
+                      href={showDetails?.officialSite}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        marginLeft: "15px",
+                      }}
+                    >
+                      {showDetails.webChannel?.name}
+                    </Button>
+                  </Col>
+                )}
+                <Col
+                  flex="1 1 auto"
+                  style={{
+                    paddingLeft: showDetails.webChannel?.name && "20px",
+                  }}
+                >
+                  {showDetails.genres?.map((v, i) => (
+                    <Tag key={i} color="info" size="SMALL">
+                      {v}
+                    </Tag>
+                  ))}
                 </Col>
+              </Row>
+            </Col>
+          </Row>
+          {!!res.length && (
+            <Col span={22} offset={1}>
+              <Text variant="h3">Cast</Text>
+            </Col>
+          )}
+          <Col span={22} offset={1}>
+            <Row gutter={[10, 10]}>
+              {loading ? (
+                createArray(5).map((v: number) => (
+                  <Col
+                    key={v}
+                    spanXs={18}
+                    spanSm={12}
+                    spanMd={8}
+                    spanLg={6}
+                    spanXl={4.8}
+                    offset={{ xs: 4 }}
+                  >
+                    <Skeleton isLoading={loading} />
+                  </Col>
+                ))
+              ) : res.length < 5 || showEntireCast ? (
+                <>
+                  {res.map((v, i) => (
+                    <Col
+                      key={i}
+                      spanXs={18}
+                      spanSm={12}
+                      spanMd={8}
+                      spanLg={6}
+                      spanXl={4.8}
+                      offset={{ xs: 4 }}
+                    >
+                      <CastCard data={v} />
+                    </Col>
+                  ))}
+                  {res.length > 5 && (
+                    <Col span={22}>
+                      <Button
+                        primary
+                        flat
+                        onClick={() => updateEntireCast(false)}
+                      >
+                        Show Less
+                      </Button>
+                    </Col>
+                  )}
+                </>
+              ) : (
+                <>
+                  {res.slice(0, 5).map((v, i) => (
+                    <Col
+                      key={i}
+                      spanXs={20}
+                      spanSm={12}
+                      spanMd={8}
+                      spanLg={6}
+                      spanXl={4.8}
+                      offset={{ xs: 2 }}
+                    >
+                      <CastCard data={v} />
+                    </Col>
+                  ))}
+                  <Col span={22}>
+                    <Button primary flat onClick={() => updateEntireCast(true)}>
+                      Show Entire Cast
+                    </Button>
+                  </Col>
+                </>
               )}
             </Row>
           </Col>
-        </Row>
+        </>
       </Modal>
     </>
   );

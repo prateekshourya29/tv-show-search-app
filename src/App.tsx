@@ -8,7 +8,7 @@ import { createArray } from "./App/helper";
 import { FetchResponse } from "./App/Typings/Shows";
 
 const App: React.FC = () => {
-  const [InputValue, updateInputValue] = React.useState<string>("");
+  const [inputValue, updateInputValue] = React.useState<string>("");
   const [res, updateRes] = React.useState<FetchResponse[]>([]);
   const [loading, updateLoading] = React.useState<boolean>(false);
 
@@ -25,13 +25,13 @@ const App: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetchTvShows(InputValue);
+    fetchTvShows(inputValue);
   };
 
   return (
     <Row>
       <Col>
-        <Text variant="h4" textAlign="center">
+        <Text variant="h2" textAlign="center">
           Search TV Show
         </Text>
       </Col>
@@ -52,7 +52,7 @@ const App: React.FC = () => {
               offset={{ xs: 2, sm: 3, xl: 4 }}
             >
               <Input
-                value={InputValue}
+                value={inputValue}
                 onChange={(e) => updateInputValue(e.target.value)}
                 label="Enter Show Name"
               />
@@ -68,7 +68,7 @@ const App: React.FC = () => {
                 type="submit"
                 primary
                 loading={loading}
-                disabled={InputValue === ""}
+                disabled={inputValue === ""}
               >
                 Search
               </Button>
